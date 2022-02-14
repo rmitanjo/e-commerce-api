@@ -1,0 +1,9 @@
+## Model: guarded vs fillable
+https://thomasventurini.com/articles/fillable-vs-guarded-on-laravel-models/
+
+## Mass assignement
+https://ropesec.com/articles/mass-assignment/
+
+## REST
+https://www.toptal.com/laravel/restful-laravel-api-tutorial
+https://www.akilischool.com/cours/laravel-creer-une-api-json#introduction-au-rest-api
