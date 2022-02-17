@@ -4,116 +4,111 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserModel;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
 	/**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $data = UserModel::all();
-		
-		return response()->json($data);
-    }
-	
-    /**
-     * Show the profile for a given user.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $data = UserModel::find($id);
-		
-		return response()->json($data);
-    }
-	
-	/**
-     * Store a newly created resource in storage.
+     * Create new user account.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function signupAction(Request $request)
     {
         // La validation de données
-		$this->validate($request, [
-			'login' => 'required|max:50',
-			'pwd' => 'required|min:8',
-			'last_name' => 'required',
-			'mail' => 'required',
+		$validatedData = $this->validate($request, [
+			'name' => 'required|string|max:255',
+			'email' => 'required|string|email|max:255|unique:users',
+			'password' => 'required|string|min:8',
 		]);
 
 		// On crée un nouvel utilisateur
 		$user = UserModel::create([
-			'login' => $request->login,
-			'pwd' => bcrypt($request->pwd),
-			'first_name' => $request->first_name,
-			'last_name' => $request->last_name,
-			'mail' => $request->mail,
+			'name' => $validatedData['name'],
+			'email' => $validatedData['email'],
+			'password' => Hash::make($validatedData['password']),
 		]);
 
+		$token = $user->createToken('auth_token')->plainTextToken;
+		
 		$res = [
-			'message' => 'Save user',
+			'access_token' => $token,
+			'token_type' => 'Bearer',
 		];
 		
 		return response()->json($res, 201);
     }
 	
 	/**
-     * Update the specified resource in storage.
+     * Authenticate user.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserModel  $userModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserModel $userModel)
-    {
-        // La validation de données
-		$this->validate($request, [
-			'login' => 'required|max:50',
-			'pwd' => 'required|min:8',
-			'last_name' => 'required',
-			'mail' => 'required',
-		]);
+	public function signinAction(Request $request)
+	{
+		if(!Auth::attempt($request->only('email', 'password'))) {
+			return response()->json([
+				'message' => 'Invalid login details'
+			], 401);
+		}
 
-		// On met a jour l'utilisateur
-		$user = UserModel::find($request->id);
-		$user->update([
-			'login' => $request->login,
-			'pwd' => bcrypt($request->pwd),
-			'first_name' => $request->first_name,
-			'last_name' => $request->last_name,
-			'mail' => $request->mail,
-		]);
+		$user = UsermODEL::where('email', $request['email'])->firstOrFail();
 
-		$res = [
-			'message' => 'Update user',
-		];
-		
-		return response()->json($res, 200);
-    }
+		$token = $user->createToken('auth_token')->plainTextToken;
+
+		return response()->json([
+			'access_token' => $token,
+			'token_type' => 'Bearer',
+		]);
+	}
 	
 	/**
-     * Remove the specified resource from storage.
+     * Logout
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $user = UserModel::find($id);
-		$user->delete();
+	public function signoutAction(Request $request)
+	{		
+		$request->user()->currentAccessToken()->delete();
 		
-		$res = [
-			'message' => 'Delete user #' . $id,
-		];
+		return response()->json([
+			'message' => 'Logout',
+		], 200);
+	}
+	
+	/**
+     * Get user profile. Restricted access
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+	public function getProfileAction($id)
+	{
+		$data = UserModel::find($id);
 		
-        return response()->json($res);
-    }
+		return response()->json($data, 200);
+	}
+	
+	/**
+     * Refresh user token
+     *
+     * @param  int $userId
+     * @return \Illuminate\Http\Response
+     */
+	public function refreshTokenAction($userId)
+	{
+		$user = UserModel::find($userId);
+		
+		$user->tokens()->delete();
+		
+        return response()->json([
+			'token' => $user->createToken($user->name)->plainTextToken
+		]);
+	}
 }

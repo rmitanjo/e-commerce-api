@@ -7,3 +7,30 @@ https://ropesec.com/articles/mass-assignment/
 ## REST
 https://www.toptal.com/laravel/restful-laravel-api-tutorial
 https://www.akilischool.com/cours/laravel-creer-une-api-json#introduction-au-rest-api
+https://github.com/kevupton/laravel-json-response
+
+
+## Auth
+https://www.oulub.com/fr-FR/Laravel/sanctum
+https://www.twilio.com/blog/build-restful-api-php-laravel-sanctum
+https://github.com/Zizaco/entrust/issues/599
+https://webmobtuts.com/backend-development/laravel-8-sanctum-authentication-for-spa-and-mobile-apis/
+https://stackoverflow.com/questions/62496954/laravel-7-sanctum-logout
+
+- Laravel sanctum
+$ composer require laravel/sanctum
+$ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+$ php artisan migrate
+
+fix: https://stackoverflow.com/questions/42244541/laravel-migration-error-syntax-error-or-access-violation-1071-specified-key-wa
+	use Illuminate\Support\Facades\Schema;
+
+	/**
+	 * Bootstrap any application services.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		Schema::defaultStringLength(191); ///(!!!)
+	}

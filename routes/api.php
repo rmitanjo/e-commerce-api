@@ -3,12 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\UserController;
+use \App\Http\Controllers\Api\UserController;
 
-//Route::apiResource("users", 'Api\UserController'); // Les routes "users.*" de l'API
-
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{id}', [UserController::class, 'show']);
-Route::post('/users', [UserController::class, 'store']);
-Route::put('/users', [UserController::class, 'update']);
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
+Route::post('/users/signup', [UserController::class, 'signupAction']);
+Route::post('/users/signin', [UserController::class, 'signinAction']);
+Route::middleware('auth:sanctum')->get('/users/signout', [UserController::class, 'signoutAction']);
+Route::middleware('auth:sanctum')->get('/users/profile/{id}', [UserController::class, 'getProfileAction']);
+Route::middleware('auth:sanctum')->get('/users/refresh/{userId}', [UserController::class, 'refreshTokenAction']);
