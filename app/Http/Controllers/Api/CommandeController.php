@@ -157,25 +157,60 @@ class CommandeController extends Controller
 			// ->orWhere('libelle', 'like', '%' . $libelle . '%');
 			
 		$arrCommande = $query->skip($start)->take($perPage)->get();
-		
-		$arr = [1,2,3,4,5];
-		
-		//Custom res content
-		$arrCommande->map(function($commande) use ($arr) {
-			$idCommande = $commande['id'];
-			
-			$arrCmdArticle = CommandeArticleModel::where([
-				['id_commande', '=', $idCommande]
-			])
-			
-			$commande['articles'] = $arr;
-			
-			return $commande;
-		});
 
 		$data = [
 			'message' => 'Paginated list of commandes',
-			'data' => $res,
+			'data' => $arrCommande,
+			'errors' => [],
+			'success' => TRUE,
+		];
+		
+		return response()->json($data, 200);
+	}
+	
+	public function detailCommandeAction($id)
+	{
+		$exists = $commande = CommandeModel::where([
+			['id', '=', $id],
+			['status', '>', 0],
+		])->exists();
+		
+		if(!$exists)
+		{
+			$data = [
+				'message' => 'Commande not found',
+				'data' => [],
+				'errors' => [],
+				'success' => FALSE,
+			];
+		
+			return response()->json($data, 404);
+		}
+		
+		$commande = CommandeModel::find($id);
+		
+		//Adding details to the output
+		$arrCmdArticles = CommandeArticleModel::where('id_commande', $id)->get();
+		
+		$arrArticle = [];
+		foreach($arrCmdArticles as $cmdArticle)
+		{
+			$idArticle = $cmdArticle['id_article'];
+			$article = ArticleModel::find($idArticle);
+			
+			$arrArticle[] = [
+				'id' => $idArticle,
+				'libelle' => $article['libelle'],
+				'qte' => $cmdArticle['qte'],
+				'pu' => $cmdArticle['pu'],
+			];
+		}
+		
+		$commande['articles'] = $arrArticle;
+		
+		$data = [
+			'message' => 'Détail commande',
+			'data' => $commande,
 			'errors' => [],
 			'success' => TRUE,
 		];
