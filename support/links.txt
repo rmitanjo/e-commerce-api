@@ -34,3 +34,9 @@ fix: https://stackoverflow.com/questions/42244541/laravel-migration-error-syntax
 	{
 		Schema::defaultStringLength(191); ///(!!!)
 	}
+	
+#Laravel commands
+https://medium.com/@bar5um/how-to-make-new-model-controller-migration-in-laravel-eba1089cbe9a
+
+#Laravel types
+https://www.codegrepper.com/code-examples/php/laravel+data+types
