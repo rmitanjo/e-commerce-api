@@ -12,6 +12,26 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
+	public function getLastestArticlesAction()
+	{
+		$count = 5;
+		
+		//$idCategorie = intval($idCategorie);
+		$res = ArticleModel::where([
+			['status', '>', 0],
+		])->take($count)
+		->orderBy('created_at', 'DESC')->get();
+		
+		$data = [
+			'message' => 'List of ' . $count . ' lastest articles',
+			'data' => $res,
+			'errors' => [],
+			'success' => TRUE,
+		];
+		
+		return response()->json($data, 200);
+	}
+	
 	public function getArticlesByCategorieAction($idCategorie)
 	{
 		//$idCategorie = intval($idCategorie);
