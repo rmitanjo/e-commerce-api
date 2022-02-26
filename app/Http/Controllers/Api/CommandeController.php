@@ -56,11 +56,11 @@ class CommandeController extends Controller
 		
 		$cmdRow = CommandeModel::create([
 			'ref' => $ref,
-			'nom' => $request->input('nom', ''),
-			'raison_sociale' => $request->input('raison_sociale', ''),
-			'nif' => $request->input('nif', ''),
+			'nom' => $request->input('nom') ? $request->input('nom') : '',
+			'raison_sociale' => $request->input('raison_sociale') ? $request->input('raison_sociale') : '',
+			'nif' => $request->input('nif') ? $request->input('nif', '') : '',
 			'telephone' => $request->input('telephone'),
-			'mail' => $request->input('mail', ''),
+			'mail' => $request->input('mail') ? $request->input('mail') : '',
 			'adresse' => $request->input('adresse'),
 			'ville' => $request->input('ville'),
 			'status' => 1,
@@ -80,7 +80,9 @@ class CommandeController extends Controller
 		
 		$data = [
 			'message' => 'Commande saved',
-			'data' => [],
+			'data' => [
+				'ref' => $ref,
+			],
 			'errors' => [],
 			'success' => TRUE,
 		];
