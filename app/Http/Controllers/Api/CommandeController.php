@@ -13,7 +13,7 @@ use App\Models\CommandeArticleModel;
 class CommandeController extends Controller
 {
 	public function saveCommandeAction(Request $request)
-	{
+	{	
 		// La validation de données
 		$request->validate([
 			'telephone' => 'required|string:max:128',
@@ -81,6 +81,7 @@ class CommandeController extends Controller
 		$data = [
 			'message' => 'Commande saved',
 			'data' => [
+				'id' => $cmdRow->id,
 				'ref' => $ref,
 			],
 			'errors' => [],
@@ -202,6 +203,7 @@ class CommandeController extends Controller
 			
 			$arrArticle[] = [
 				'id' => $idArticle,
+				'ref' => $article['ref'],
 				'libelle' => $article['libelle'],
 				'qte' => $cmdArticle['qte'],
 				'pu' => $cmdArticle['pu'],
@@ -209,6 +211,7 @@ class CommandeController extends Controller
 		}
 		
 		$commande['articles'] = $arrArticle;
+		$commande['num_commande'] = explode('-', $commande['ref'])[2];
 		
 		$data = [
 			'message' => 'Détail commande',

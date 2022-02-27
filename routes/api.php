@@ -32,4 +32,4 @@ Route::middleware('auth:sanctum')->delete('/articles/{id}', [ArticleController::
 Route::post('/commandes', [CommandeController::class, 'saveCommandeAction']);
 Route::middleware('auth:sanctum')->put('/commandes/valider/{id}', [CommandeController::class, 'validerCommandeAction'])->where('id', '[0-9]+');
 Route::middleware('auth:sanctum')->post('/commandes/list', [CommandeController::class, 'listCommandeAction']);
-Route::middleware('auth:sanctum')->get('/commandes/detail/{id}', [CommandeController::class, 'detailCommandeAction'])->where('id', '[0-9]+');
+Route::get('/commandes/detail/{id}', [CommandeController::class, 'detailCommandeAction'])->where('id', '[0-9]+');
