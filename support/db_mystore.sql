@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 28 fév. 2022 à 13:46
+-- Généré le :  lun. 28 fév. 2022 à 19:13
 -- Version du serveur :  10.1.33-MariaDB
 -- Version de PHP :  7.2.6
 
@@ -93,16 +93,6 @@ CREATE TABLE `personal_access_tokens` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `personal_access_tokens`
---
-
-INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\UserModel', 1, 'auth_token', '4efd40461a42a6b9b6fd6355a3ce4339a9eb1504665ab34eb62433ed378b2976', '[\"*\"]', NULL, '2022-02-21 07:59:45', '2022-02-21 07:59:45'),
-(2, 'App\\Models\\UserModel', 1, 'auth_token', 'ace8e2b342b86bfebcfb2ede36709e72c8583d2ff080ed1f7a5580ed42d35841', '[\"*\"]', '2022-02-27 10:04:13', '2022-02-21 08:00:01', '2022-02-27 10:04:13'),
-(3, 'App\\Models\\UserModel', 1, 'auth_token', '7e0d545405d273ce3b3f179a5549810f79a889bfc50265df9003fc5f3f8053ab', '[\"*\"]', '2022-02-22 13:52:26', '2022-02-22 04:17:32', '2022-02-22 13:52:26'),
-(4, 'App\\Models\\UserModel', 1, 'auth_token', '39d9c6bb983e17c1117b85df30ab29668a7fa5caa3d6333ac5fd576aa32b45b6', '[\"*\"]', '2022-02-23 03:38:12', '2022-02-23 03:36:49', '2022-02-23 03:38:12');
-
 -- --------------------------------------------------------
 
 --
@@ -127,6 +117,7 @@ INSERT INTO `r_commande_article` (`id_article`, `id_commande`, `qte`, `pu`) VALU
 (1, 4, 1, 1200.00),
 (1, 5, 2, 1200.00),
 (1, 6, 1, 1200.00),
+(1, 7, 1, 1200.00),
 (2, 2, 1, 1200.00),
 (2, 3, 2, 1200.00),
 (2, 5, 1, 1200.00),
@@ -136,7 +127,8 @@ INSERT INTO `r_commande_article` (`id_article`, `id_commande`, `qte`, `pu`) VALU
 (4, 3, 3, 950.00),
 (4, 4, 3, 950.00),
 (4, 5, 1, 950.00),
-(4, 6, 2, 950.00);
+(4, 6, 2, 950.00),
+(4, 7, 2, 950.00);
 
 -- --------------------------------------------------------
 
@@ -167,10 +159,10 @@ CREATE TABLE `t_article` (
 --
 
 INSERT INTO `t_article` (`id`, `id_categorie`, `ref`, `libelle`, `pu`, `ancien_pu`, `stock`, `description`, `image1`, `image2`, `image3`, `image4`, `created_at`, `status`, `updated_at`) VALUES
-(1, 11, 'HB64UO', 'Article test updated', 1200.00, 0.00, 4, 'Article description up', 'assets/images/product1.jpg', '', '', '', '2022-02-24 18:40:53', 1, '2022-02-22 13:52:26'),
-(2, 11, 'HB64UO', 'Article test 3', 1200.00, 0.00, 4, 'Article description', 'assets/images/product2.jpg', '', '', '', '2022-02-24 18:40:53', 1, '2022-02-22 13:52:26'),
-(3, 11, 'HB64UO', 'Article test 3', 1300.00, 0.00, 4, 'Article description', 'assets/images/product3.jpg', '', '', '', '2022-02-24 18:40:53', 1, '2022-02-22 13:52:26'),
-(4, 3, 'HB64UZ', 'Article test 1', 950.00, 0.00, 10, 'Article description', 'assets/images/product4.jpg', '', '', '', '2022-02-25 06:58:56', 1, '2022-02-22 13:41:09');
+(1, 11, 'HB64U1', 'Portable 1', 1200.00, 0.00, 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud', 'assets/images/product1.jpg', '', '', '', '2022-02-28 17:57:43', 1, '2022-02-22 13:52:26'),
+(2, 11, 'HB64XE', 'Portable 2', 1200.00, 0.00, 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud', 'assets/images/product2.jpg', '', '', '', '2022-02-28 17:57:46', 1, '2022-02-22 13:52:26'),
+(3, 11, 'HB64FE', 'Portable 3', 1300.00, 0.00, 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud', 'assets/images/product3.jpg', '', '', '', '2022-02-28 17:57:50', 1, '2022-02-22 13:52:26'),
+(4, 11, 'HB64UZ', 'Portable 4', 950.00, 0.00, 10, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud', 'assets/images/product4.jpg', '', '', '', '2022-02-28 17:57:53', 1, '2022-02-22 13:41:09');
 
 -- --------------------------------------------------------
 
@@ -190,7 +182,7 @@ CREATE TABLE `t_categorie` (
 --
 
 INSERT INTO `t_categorie` (`id`, `libelle`, `description`, `status`) VALUES
-(1, 'PC TABLETTES (up)', 'up desc', 0),
+(1, 'PC TABLETTES', 'up desc', 0),
 (2, 'DESKTOPS', '', 0),
 (3, 'LOGICIELS', '', 1),
 (4, 'ECRAN ET VIDEOPROJECTEURS', '', 1),
@@ -200,11 +192,11 @@ INSERT INTO `t_categorie` (`id`, `libelle`, `description`, `status`) VALUES
 (8, 'CLAVIER ET SOURIS', '', 1),
 (9, 'CONNECTIQUE ORDIS', '', 1),
 (10, 'HOUSSE ET SACOCHES', '', 1),
-(11, 'LIVRES INFORMATIQUES', '', 1),
+(11, 'PORTABLES', '', 1),
 (12, 'Categorie test', 'desc', 0),
 (13, 'Categorie test 2', 'desc 2', 0),
-(14, 'Categorie test 3', 'desc 3', 1),
-(15, 'Article test 3', 'Article description', 1);
+(14, 'Categorie test 3', 'desc 3', 0),
+(15, 'Article test 3', 'Article description', 0);
 
 -- --------------------------------------------------------
 
@@ -237,7 +229,8 @@ INSERT INTO `t_commande` (`id`, `ref`, `nom`, `raison_sociale`, `nif`, `telephon
 (3, 'F2022-02-000003', 'rarzer', 'zerzer', 'zerzer', 'zerzer', 'zerzer', 'ezrzer', 'ezrzer', '2022-02-27', NULL, 1),
 (4, 'F2022-02-000004', 'RAKREOFK', 'dfgdfg', 'dfgdfg', 'dfgdfg', 'r.mitanjo@gmail.com', 'dfgdfg', 'dfgdfg', '2022-02-27', NULL, 1),
 (5, 'F2022-02-000005', 'RAKREOFK', 'zerez', 'zerzer', 'gfdg', 'dfgzrfsd', 'fsdf', 'sdfsdf', '2022-02-27', NULL, 1),
-(6, 'F2022-02-000006', 'John Doe', 'sdf', '0123156456', '0321123564', 'johndoe@gmail.com', 'Rue Ratsimilaho', 'Antananarivo', '2022-02-27', NULL, 1);
+(6, 'F2022-02-000006', 'John Doe', 'sdf', '0123156456', '0321123564', 'johndoe@gmail.com', 'Rue Ratsimilaho', 'Antananarivo', '2022-02-27', NULL, 1),
+(7, 'F2022-02-000007', 'fsdf', 'sdfsdf', 'sdfsd', 'fsdf', 'sdfs', 'dsdfsdf', 'sdfsdf', '2022-02-28', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -344,7 +337,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `t_article`
@@ -362,7 +355,7 @@ ALTER TABLE `t_categorie`
 -- AUTO_INCREMENT pour la table `t_commande`
 --
 ALTER TABLE `t_commande`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `users`
