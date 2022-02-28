@@ -1,0 +1,3 @@
+#### Configuration base de données:
+- Copier le fichier .env dans le dossier racine, contient la configuration de la base
+- Dans le fichier .env se trouve la config de l'application

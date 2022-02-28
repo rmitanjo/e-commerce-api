@@ -1,0 +1,56 @@
+https://stackoverflow.com/questions/59260031/public-src-and-scripts-folder-not-created-while-using-create-react-app
+
+npm rm -g create-react-app
+npm install -g create-react-app
+npx create-react-app my-app
+
+https://stackoverflow.com/questions/18419144/npm-not-working-read-econnreset
+npm config set registry http://registry.npmjs.org/
+
+https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
+
+https://reactrouter.com/docs/en/v6/getting-started/tutorial
+
+https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_dividers
+
+https://www.w3schools.com/howto/howto_css_column_cards.asp
+
+https://www.w3schools.com/howto/howto_css_product_card.asp
+
+https://www.geeksforgeeks.org/react-bootstrap-container-row-and-col-component/
+
+https://react-bootstrap.github.io/layout/grid/
+
+https://www.geeksforgeeks.org/how-to-create-footer-to-stay-at-the-bottom-of-a-web-page/
+
+https://www.freecodecamp.org/news/react-props-cheatsheet/
+
+https://www.freecodecamp.org/news/how-to-use-axios-with-react/
+
+https://fr.reactjs.org/docs/hooks-effect.html
+
+https://stackoverflow.com/questions/64502434/reactjs-how-to-import-an-image-from-a-variable-path
+
+https://dev.to/duomly/how-to-set-the-default-route-in-reactjs-4okl
+
+##REDUX
+https://codesandbox.io/s/github/sumanchalki/shopping-cart-react-redux/tree/master/
+https://www.youtube.com/watch?v=1r6-WjzDgbM
+
+https://blog.jakoblind.no/react-component-not-updating/
+
+###BOOTSTRAP
+https://react-icons.github.io/react-icons/icons?name=bs
+https://www.npmjs.com/package/react-icons
+https://www.npmjs.com/package/react-icons
+https://react-bootstrap.github.io/layout/stack/#stack-props
+https://www.geeksforgeeks.org/react-bootstrap-form-component/
+https://linguinecode.com/post/how-to-get-form-data-on-submit-in-reactjs
+
+###Formatting
+https://www.npmjs.com/package/react-number-format
+https://bootsnipp.com/snippets/M3jV3
+https://www.npmjs.com/package/react-to-print
+
+###Animations / ameliorations visuelles
+https://www.npmjs.com/package/react-spinners

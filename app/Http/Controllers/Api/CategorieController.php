@@ -13,7 +13,7 @@ class CategorieController extends Controller
 {
 	public function getCategoriesAction()
 	{
-		$res = CategorieModel::all()->where('status', '>', 0);
+		$res = CategorieModel::where('status', '>', 0)->get();
 		
 		$data = [
 			'message' => 'List all categories',
