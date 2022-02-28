@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->put('/categories', [CategorieController::clas
 Route::middleware('auth:sanctum')->delete('/categories/{id}', [CategorieController::class, 'deleteCategorieAction'])->where('id', '[0-9]+');
 
 // Articles
+Route::get('/articles/{id}', [ArticleController::class, 'getArticleByIdAction'])->where('id', '[0-9]+');
 Route::get('/articles/lastest', [ArticleController::class, 'getLastestArticlesAction']);
 Route::get('/articles/by-categorie/{idCategorie}', [ArticleController::class, 'getArticlesByCategorieAction'])->where('idCategorie', '[0-9]+');
 Route::middleware('auth:sanctum')->post('/articles', [ArticleController::class, 'saveArticleAction']);

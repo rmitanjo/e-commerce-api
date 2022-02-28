@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
+	public function getArticleByIdAction($id) {
+		$res = ArticleModel::find($id);
+		
+		$data = [
+			'message' => 'Find article by id',
+			'data' => $res,
+			'errors' => [],
+			'success' => TRUE,
+		];
+		
+		return response()->json($data, 200);
+	}
+	
 	public function getLastestArticlesAction()
 	{
 		$count = 5;
@@ -34,6 +47,8 @@ class ArticleController extends Controller
 	
 	public function getArticlesByCategorieAction($idCategorie)
 	{
+		$cat = CategorieModel::find($idCategorie);
+		
 		//$idCategorie = intval($idCategorie);
 		$res = ArticleModel::where([
 			['id_categorie', '=', $idCategorie],
@@ -42,7 +57,10 @@ class ArticleController extends Controller
 		
 		$data = [
 			'message' => 'List articles by categorie',
-			'data' => $res,
+			'data' => [
+				'articles' => $res,
+				'categorie' => $cat['libelle'],
+			],
 			'errors' => [],
 			'success' => TRUE,
 		];
